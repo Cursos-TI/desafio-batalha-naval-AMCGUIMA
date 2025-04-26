@@ -39,6 +39,28 @@ int main() {
     //DECLARAÇAO DA MATRIZ 10x10 QUE REPRESENTARÁ O TABULEIRO  
     int tabuleiro[10][10];
 
+    int Cone[3][5]=
+    {
+        {0, 0, 1, 0, 0},
+        {0, 1, 1, 1, 0},
+        {1, 1, 1, 1, 1}
+    };
+    
+    int Octaedro[3][5]=
+    {
+        {0, 0, 1, 0, 0},
+        {0, 1, 1, 1, 0},
+        {0, 0, 1, 0, 0}
+    };
+
+    int Cruz[3][5]=
+    {
+        {0, 0, 1, 0, 0},
+        {1, 1, 1, 1, 1},
+        {0 ,0, 1, 0, 0}
+
+    };
+
     //INICIALIZA COM ZERO A MATRIZ PARA REPRESENTAR AGUA
     for (int x = 0; x < 10; x++)
     {
@@ -48,6 +70,7 @@ int main() {
         }
         
     }
+
     
 
 
@@ -57,11 +80,17 @@ int main() {
     int navio_3[3]={3, 3, 3};
     int navio_4[3]={3, 3, 3};
 
-    //COORDENADAS       X  Y
+    //COORDENADAS       X  Y   DOS NAVIOS
     int coordenada1[2]={0, 2}; // horizontal
     int coordenada2[2]={2, 0}; // vertical
     int coordenada3[2]={5, 8}; // diagonal 1 para baixo esquerda
     int coordenada4[2]={2, 4}; // diagonal 2 para baixo direita
+
+    //COORDENADAS INICIAIS DAS HABILIDADES
+    int coordCone[2]={1, 7};
+    int coordOctaedro[2]={8, 2};
+    int coordCruz[2]={5, 3};
+
 
  //      0  1  2  3  4  5  6  7  8  9-->POSIÇOES NA MATRIZ
  //   | --------->  Y
@@ -129,9 +158,60 @@ int main() {
                 } 
         }
 
+        //HABILIDADE -- CONE
+ //      y  
+//     --> 0  1  2  3  4
+ //   | 0 {0, 0, 1, 0, 0},
+ //  X| 1 {0, 1, 1, 1, 0},
+ //   v 2 {1, 1, 1, 1, 1}
+
+ //COORDENADA x= 3  Y= 5
+
+  //     0  1  2  3  4  5  6  7  8  9-->POSIÇOES NA MATRIZ
+ //   | --------->  Y
+ // 0 | {0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+ // 1 | {0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+ // 2 | {0, 0, 0, 0, 0, 5, 0, 0, 0, 0 },
+ // 3 V {0, 0, 0, 0, 5, 5, 5, 0, 0, 0 },
+ // 4   {0, 0, 0, 5, 5, 5, 5, 5, 0, 0 },
+ // 5 X {0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+ // 6   {0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+ // 7   {0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+ // 8   {0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+ // 9   {0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+ //                                                
+        for (int x = (coordCone[0] - 1); x < (coordCone[0] + 2); x++)
+        {                                
+            for (int y = (coordCone[1] - 2); y < (coordCone[1] + 3); y++)
+            {
+                tabuleiro[x][y] = Cone[x - (coordCone[0] - 1)][y - (coordCone[1] - 2)];
+            }
+            
+        }
+
+        for (int x = (coordOctaedro[0] - 1); x < (coordOctaedro[0] + 2); x++)
+        {                                
+            for (int y = (coordOctaedro[1] - 2); y < (coordOctaedro[1] + 3); y++)
+            {
+                tabuleiro[x][y] = Octaedro[x - (coordOctaedro[0] - 1)][y - (coordOctaedro[1] - 2)];
+            }
+            
+        }
+
+        for (int x = (coordCruz[0] - 1); x < (coordCruz[0] + 2); x++)
+        {                                
+            for (int y = (coordCruz[1] - 2); y < (coordCruz[1] + 3); y++)
+            {
+                tabuleiro[x][y] = Cruz[x - (coordCruz[0] - 1)][y - (coordCruz[1] - 2)];
+            }
+            
+        }
+
+        
+        
 
         printf("\nTABULEIRO - BATALHA NAVAL\n\n");
-        //LOOP PARA MOSTRAR NA TELA OS VALORES DAS POSICOES DO TABULEIRO
+        //LOOP PARA MOSTRAR NA TELA OS VALORES DAS POSICOES DO TABULEIRO   
         for (int x = 0; x < 10; x++)
         {
             for (int y = 0; y < 10; y++)
